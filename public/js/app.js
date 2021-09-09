@@ -481,8 +481,8 @@ eval("window._ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodas
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\LuciaFalcinelli\Documents\GitHub\ccfas_platform\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\LuciaFalcinelli\Documents\GitHub\ccfas_platform\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! /Users/dave/Sites/ccafs-eu/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/dave/Sites/ccafs-eu/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })

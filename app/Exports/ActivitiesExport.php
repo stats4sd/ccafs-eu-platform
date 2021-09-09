@@ -7,8 +7,9 @@ use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 
-class ActivitiesExport implements FromCollection,  WithTitle, WithHeadings, WithMapping
+class ActivitiesExport implements FromCollection,  WithTitle, WithHeadings, WithMapping, WithStrictNullComparison
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -32,7 +33,7 @@ class ActivitiesExport implements FromCollection,  WithTitle, WithHeadings, With
             $value->id,
             $value->output_id,
             $value->name,
-           
+
         ];
     }
 

@@ -9,8 +9,9 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
+use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 
-class AimsExport implements FromCollection, WithTitle, WithHeadings, WithMapping
+class AimsExport implements FromCollection, WithTitle, WithHeadings, WithMapping, WithStrictNullComparison
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -37,7 +38,7 @@ class AimsExport implements FromCollection, WithTitle, WithHeadings, WithMapping
                 $value->id,
                 $value->name,
                 $value->is_other ? 1 : '0',
-               
+
             ];
         }
         return [];

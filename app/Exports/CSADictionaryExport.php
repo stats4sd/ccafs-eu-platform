@@ -4,9 +4,10 @@ namespace App\Exports;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 use Maatwebsite\Excel\Concerns\WithTitle;
 
-class CSADictionaryExport implements FromCollection, WithTitle
+class CSADictionaryExport implements FromCollection, WithTitle, WithStrictNullComparison
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -41,7 +42,7 @@ class CSADictionaryExport implements FromCollection, WithTitle
             ['elements', 'CSA elements Ecosystem', 'Ecosystem and landscape management to conserve ecosystem services that are key to increase at the same time resource efficiency and resilience',],
             ['elements', 'CSA elements Management of farms', 'Management of farms, crops, livestock, aquaculture and capture fisheries to manage resources better, produce more with less while increasing resilience',],
 
-             
+
             ['investments', 'CSA investments Exploiting opportunities', 'Exploiting opportunities for reducing or removing greenhouse gas emissions where feasible.',],
             ['investments', 'CSA investments Understanding and planning', 'Understanding and planning for adaptive transitions that may be needed, for example into new farming systems or livelihoods, ',],
             ['investments', 'CSA investments Managing climate risks', 'Managing climate risks',],
@@ -57,8 +58,8 @@ class CSADictionaryExport implements FromCollection, WithTitle
             ['enable envs', 'CSA enable envs Infrastructure.', 'Infrastructure',],
             ['enable envs', 'CSA enable envs Climate information services.', 'Climate information services',],
             ['enable envs', 'CSA enable envs Index-based insurance.', 'Index-based insurance',],
-         
-        
+
+
         ]);
     }
 }

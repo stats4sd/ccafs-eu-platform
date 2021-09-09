@@ -11,8 +11,9 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
+use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 
-class ActionsExport implements FromCollection, WithTitle, WithHeadings, WithMapping
+class ActionsExport implements FromCollection, WithTitle, WithHeadings, WithMapping, WithStrictNullComparison
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -32,7 +33,7 @@ class ActionsExport implements FromCollection, WithTitle, WithHeadings, WithMapp
     public function map($value) : array
     {
         $action = Action::findOrFail($value->action_id);
-      
+
             return [
                 $value->effect_id,
                 $value->action_id,
@@ -83,7 +84,7 @@ class ActionsExport implements FromCollection, WithTitle, WithHeadings, WithMapp
                 $action->roll_out,
                 $action->dissemination,
             ];
-        
+
     }
 
     public function headings(): array

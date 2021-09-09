@@ -9,8 +9,9 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
+use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 
-class IndicatorValuesExport implements FromCollection, WithTitle, WithHeadings, WithMapping
+class IndicatorValuesExport implements FromCollection, WithTitle, WithHeadings, WithMapping, WithStrictNullComparison
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -30,7 +31,7 @@ class IndicatorValuesExport implements FromCollection, WithTitle, WithHeadings, 
 
     public function map($value) : array
     {
-       
+
         return [
             $value->id,
             $value->linkEffectIndicator->effect_id,
