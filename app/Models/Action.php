@@ -44,6 +44,11 @@ class Action extends Model
         return null;
     }
 
+    /**
+     * Get the Geoboundary IDs as as comma-separated string
+     *
+     * @return string
+     */
     public function getGeoBoundaryIdAttribute()
     {
         if ($this->geoboundaries()->count() > 0) {
@@ -60,6 +65,11 @@ class Action extends Model
         return 'null';
     }
 
+    /**
+     * Extract the 'number' part of the output name field (assumes that the first 2 characters of the name are the number... )
+     *
+     * @return string
+     */
     public function getSubactivitiesNumbersAttribute()
     {
         if ($this->subactivities()->count() > 0) {
@@ -78,6 +88,11 @@ class Action extends Model
         return 'null';
     }
 
+    /**
+     * Extract the 'number' part of the output name field (assumes that the first 2 characters of the name are the number... )
+     *
+     * @return string
+     */
     public function getActivitiesNumbersAttribute()
     {
         if ($this->activities()->count() > 0) {
@@ -96,6 +111,11 @@ class Action extends Model
         return 'null';
     }
 
+    /**
+     * Extract the 'number' part of the output name field (assumes that the first 2 characters of the name are the number... )
+     *
+     * @return string
+     */
     public function getOutputsNumbersAttribute()
     {
 
@@ -117,6 +137,12 @@ class Action extends Model
         return 'null';
     }
 
+
+    /**
+     * Extract 'number' portion of the Milestone name field (assumes that the first 2 characters are the number... )
+     *
+     * @return string;
+     */
     public function getMilestonesNumbersAttribute()
     {
         if ($this->milestones()->count() > 0) {
