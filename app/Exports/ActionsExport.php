@@ -15,6 +15,16 @@ use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 
 class ActionsExport implements FromCollection, WithTitle, WithHeadings, WithMapping, WithStrictNullComparison
 {
+
+    public $pillars;
+    public $system;
+
+    public function __construct ()
+    {
+
+    }
+
+
     /**
     * @return \Illuminate\Support\Collection
     */
@@ -33,6 +43,7 @@ class ActionsExport implements FromCollection, WithTitle, WithHeadings, WithMapp
     public function map($value) : array
     {
         $action = Action::findOrFail($value->action_id);
+
 
             return [
                 $value->effect_id,

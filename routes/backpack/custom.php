@@ -28,7 +28,6 @@ Route::group([
     Route::crud('ipflow', 'IpflowCrudController');
     Route::crud('scope', 'ScopeCrudController');
     Route::crud('geoboundary', 'GeoBoundaryCrudController');
-    Route::crud('csaframework', 'CsaFrameworkCrudController');
     Route::crud('subactivity', 'SubactivityCrudController');
     Route::crud('activity', 'ActivityCrudController');
     Route::crud('output', 'OutputCrudController');

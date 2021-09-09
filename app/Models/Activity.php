@@ -43,6 +43,12 @@ class Activity extends Model
         return $this->belongsToMany(Action::class, '_link_actions_activities');
     }
 
+    public function milestones ()
+    {
+       return $this->hasMany(Milestone::class);
+    }
+
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS

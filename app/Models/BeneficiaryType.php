@@ -36,7 +36,7 @@ class BeneficiaryType extends Model
     */
     public function beneficiaries()
     {
-        return $this->hasMany(Beneficiary::class);
+        return $this->hasMany(Beneficiary::class, 'beneficiary_type_id');
     }
 
     /*
