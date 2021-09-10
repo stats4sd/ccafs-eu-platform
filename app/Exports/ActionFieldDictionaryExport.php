@@ -4,9 +4,10 @@ namespace App\Exports;
 
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 use Maatwebsite\Excel\Concerns\WithTitle;
 
-class ActionFieldDictionaryExport implements FromCollection, WithTitle
+class ActionFieldDictionaryExport implements FromCollection, WithTitle, WithStrictNullComparison
 {
     public function title(): string
     {

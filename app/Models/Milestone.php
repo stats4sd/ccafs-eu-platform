@@ -39,6 +39,12 @@ class Milestone extends Model
         return $this->belongsToMany(Action::class, '_link_actions_milestones');
     }
 
+    public function activity ()
+    {
+       return $this->belongsTo(Activity::class);
+    }
+
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES

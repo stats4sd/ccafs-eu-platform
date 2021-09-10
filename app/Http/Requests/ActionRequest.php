@@ -27,9 +27,9 @@ class ActionRequest extends FormRequest
     {
         return [
             'team_id' => 'required',
+            'short_name' => 'required',
             'description' => 'required',
             'start' => 'required',
-
         ];
     }
 

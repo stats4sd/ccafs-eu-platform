@@ -9,8 +9,9 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
+use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 
-class BeneficiariesExport implements FromCollection, WithTitle, WithHeadings, WithMapping
+class BeneficiariesExport implements FromCollection, WithTitle, WithHeadings, WithMapping, WithStrictNullComparison
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -33,8 +34,8 @@ class BeneficiariesExport implements FromCollection, WithTitle, WithHeadings, Wi
         return [
             $value->effect_id,
             $value->id,
-            $value->beneficiaries_types->id,
-            $value->beneficiaries_types->name,
+            $value->beneficiary_type->id,
+            $value->beneficiary_type->name,
             $value->description,
         ];
     }

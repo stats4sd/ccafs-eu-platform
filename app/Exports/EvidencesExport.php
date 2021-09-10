@@ -9,9 +9,9 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
+use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 
-
-class EvidencesExport implements FromCollection, WithTitle, WithHeadings, WithMapping
+class EvidencesExport implements FromCollection, WithTitle, WithHeadings, WithMapping, WithStrictNullComparison
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -20,7 +20,7 @@ class EvidencesExport implements FromCollection, WithTitle, WithHeadings, WithMa
     {
         return Evidence::all();
     }
-    
+
      /**
      * @return string
      */

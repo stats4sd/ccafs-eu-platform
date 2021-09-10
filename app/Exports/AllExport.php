@@ -6,15 +6,8 @@ use App\Http\Requests\ActivityRequest;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class CcfasExport implements WithMultipleSheets
+class AllExport implements WithMultipleSheets
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
-    {
-        //
-    }
 
     /**
     * @return array

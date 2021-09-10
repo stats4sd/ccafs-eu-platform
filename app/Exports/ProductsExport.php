@@ -10,8 +10,9 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
+use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 
-class ProductsExport implements FromCollection, WithTitle, WithHeadings, WithMapping
+class ProductsExport implements FromCollection, WithTitle, WithHeadings, WithMapping, WithStrictNullComparison
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -32,7 +33,7 @@ class ProductsExport implements FromCollection, WithTitle, WithHeadings, WithMap
     public function map($value) : array
     {
         $product = Product::findOrFail($value->product_id);
-       
+
             return [
                 $value->action_id,
                 $value->product_id,
@@ -43,8 +44,8 @@ class ProductsExport implements FromCollection, WithTitle, WithHeadings, WithMap
                 $product->publication,
                 $product->distribution,
             ];
-        
-     
+
+
     }
 
     public function headings(): array

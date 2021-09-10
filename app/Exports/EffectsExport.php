@@ -10,12 +10,13 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
+use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 
-class EffectsExport implements FromCollection, WithTitle, WithHeadings, WithMapping
+class EffectsExport implements FromCollection, WithTitle, WithHeadings, WithMapping, WithStrictNullComparison
 {
-   
+
     /**
     * @return \Illuminate\Support\Collection
     */
@@ -23,10 +24,10 @@ class EffectsExport implements FromCollection, WithTitle, WithHeadings, WithMapp
     {
         $query = Effect::with(['team'])->get();
 
-    
+
         return $query;
     }
-    
+
     /**
      * @return string
      */
@@ -55,6 +56,6 @@ class EffectsExport implements FromCollection, WithTitle, WithHeadings, WithMapp
         ];
     }
 
-    
+
 
 }

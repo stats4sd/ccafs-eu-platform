@@ -13,7 +13,7 @@ use App\Models\Indicator;
 use App\Models\Milestone;
 use App\Models\Beneficiary;
 use App\Models\Subactivity;
-use App\Exports\CcfasExport;
+use App\Exports\AllExport;
 use App\Exports\EffectsExport;
 use App\Models\Disaggregation;
 use App\Models\IndicatorValue;
@@ -63,7 +63,7 @@ class EffectCrudController extends CrudController
         CRUD::setEntityNameStrings('effect', 'effects');
 
         // CRUD::set('export.exporter', EffectsExport::class);
-        CRUD::set('export.exporter', CcfasExport::class);
+        CRUD::set('export.exporter', AllExport::class);
     }
 
     /**
@@ -243,7 +243,7 @@ class EffectCrudController extends CrudController
                         'type' => "hidden",
                         'value' => null
 
-                        
+
                     ],
                     [
                         'type' => "relationship",
@@ -297,7 +297,7 @@ class EffectCrudController extends CrudController
                     [   // Upload
                         'name'      => 'file_source',
                         'label'     => 'I.4.2 If you have a document that supports this indicator us evidence, you can upload it here.',
-                        'hint'      => 'If your want to open a file that has already been uploaded, right click on the link and select "Open in a new tab"',
+                        'hint'      => 'If you want to open a file that has already been uploaded, right click on the link and select "Open in a new tab"',
                         'type'      => 'upload_multiple_for_repeatable',
                         'upload'    => true,
                         'disk'      => 'public',
@@ -306,20 +306,15 @@ class EffectCrudController extends CrudController
                         'name'    => 'level_attribution_id',
                         'type' => "select_from_array",
                         'label' => 'I.5 What is the level of attribution to the change in the indicator due to the work described?',
-
-                        // optional - force the related options to be a custom query, instead of all();
                         'options'   => $this->getLevelAttributions(),
                     ],
                     [
                         'name'    => 'disaggregation_id',
                         'type' => "free_text",
                         'label' => 'I.6 If you can disaggregate this indicator, please indicate the criteria it can be disaggregated by',
-                        'hint' => 'If do you have more that one disaggregate, use the comma "," to separate them',
-                        // optional - force the related options to be a custom query, instead of all();
+                        'hint' => 'If you have more disaggregation, use a comma (",") to separate each one',
                         'options'   => $this->getDisaggregations(),
                     ]
-
-
                 ],
 
                 // optional
@@ -440,8 +435,10 @@ class EffectCrudController extends CrudController
                 'name' => 'actions',
                 'minimum_input_length' => 0,
                 'placeholder' => "Select an Action",
+                'attribute' => 'short_label',
                 'label' =>'',
                 'tab' => 'Action',
+                'inline_create' => ['entity' => 'action'],
             ]
         ]);
 
@@ -559,7 +556,7 @@ class EffectCrudController extends CrudController
 
         $response = $this->traitUpdate();
         $effect = $this->crud->getCurrentEntry();
-     
+
         $this->updateOrCreateIndicators($request->indicator_repeat, $effect->id);
         $this->updateOrCreateEvidences($request->evidences_repeat, $effect->id);
         $this->updateOrCreateBeneficiaries($request->beneficiaries_repeat, $effect->id);
@@ -591,18 +588,18 @@ class EffectCrudController extends CrudController
                 $disaggregation_name = Disaggregation::get()->pluck('name')->toArray();
 
                 foreach ($indicators_repeat as $disaggregation) {
-                  
+
                     $disaggregations = explode(',', $disaggregation->disaggregation_id);
                     $disaggregation_id = [];
                     foreach($disaggregations as $disag){
                         $disag = trim($disag);
                         if (in_array($disag, $disaggregation_name)) {
                             $dis = Disaggregation::where('name',$disag)->first();
-                            
+
                             $is_other = $dis['is_other'];
-                            
+
                         } else {
-                            
+
                             $is_other = true;
                         }
                         $disaggregation = Disaggregation::updateOrCreate(
@@ -611,8 +608,8 @@ class EffectCrudController extends CrudController
                         );
                         $disaggregation_id[] = $disaggregation->id;
                     }
-                    
-                    
+
+
                 }
                 $indicator_value = IndicatorValue::updateOrCreate(
                     [
@@ -627,11 +624,11 @@ class EffectCrudController extends CrudController
                         'disaggregation_id'=> $disaggregation_id
                         ]
                     );
-                    
-                  
+
+
                 $indicator_value->save();
-                
-                
+
+
 
             }
         }
@@ -676,12 +673,12 @@ class EffectCrudController extends CrudController
     public function updateOrCreateEvidences($repeat, $effect_id)
     {
         $evidence_repeat = json_decode($repeat);
-        
+
         foreach ($evidence_repeat as $index => $evidence) {
              $evidence = (array)$evidence;
-      
+
             if (count($evidence)) {
-               
+
                 $new_evidence  = Evidence::updateOrCreate(
                     [
                         'id' => $evidence['id_evidence']
@@ -694,14 +691,14 @@ class EffectCrudController extends CrudController
                         'files_description' => $evidence['files_description']
                     ]
                 );
-           
-              
+
+
                 $new_evidence->save();
             }
 
         }
 
-        
+
     }
 
 }

@@ -26,7 +26,10 @@ class BeneficiaryRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'beneficiary_type_id' => 'required|exists:beneficiaries_types,id',
+            'effect_id' => 'required|exists:effects,id',
+            'description' => 'required|string|max:65535',
+            'is_other' => 'sometimes',
         ];
     }
 

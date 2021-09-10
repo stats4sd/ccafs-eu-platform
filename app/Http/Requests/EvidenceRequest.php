@@ -26,7 +26,11 @@ class EvidenceRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'effect_id' => 'sometimes|required|exists:effects,id',
+            'description' => 'required|string|max:65535',
+            'files' => 'nullable',
+            'files_description' => 'nullable|required_with:files',
+            'urls' => 'nullable|string|max:255',
         ];
     }
 

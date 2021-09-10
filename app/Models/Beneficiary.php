@@ -39,7 +39,7 @@ class Beneficiary extends Model
         return $this->belongsTo(Effect::class, 'effect_id');
     }
 
-    public function beneficiaries_types()
+    public function beneficiary_type()
     {
         return $this->belongsTo(BeneficiaryType::class, 'beneficiary_type_id');
     }
