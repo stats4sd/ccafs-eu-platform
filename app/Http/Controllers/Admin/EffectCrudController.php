@@ -435,8 +435,10 @@ class EffectCrudController extends CrudController
                 'name' => 'actions',
                 'minimum_input_length' => 0,
                 'placeholder' => "Select an Action",
+                'attribute' => 'short_label',
                 'label' =>'',
                 'tab' => 'Action',
+                'inline_create' => ['entity' => 'action'],
             ]
         ]);
 

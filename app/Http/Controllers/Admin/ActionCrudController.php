@@ -153,8 +153,8 @@ class ActionCrudController extends CrudController
             ],
             [
                 'type' => "text",
-                'name' => 'description',
-                'label' => 'Description',
+                'name' => 'short_label',
+                'label' => 'ID: Short Name',
 
             ],
             [
@@ -210,6 +210,12 @@ class ActionCrudController extends CrudController
                 'name' => 'completed',
                 'value' => '1',
                 'tab' => 'Action'
+            ],
+            [
+                'type' => 'text',
+                'name' => 'short_name',
+                'label' => 'Enter a short name to help identify the action',
+                'tab' => 'Action',
             ],
             [
                 'name'          => 'description',
@@ -419,33 +425,37 @@ class ActionCrudController extends CrudController
             ],
         ]);
 
-        $this->crud->addSaveAction([
-            'name' => 'save_action_and_next',
-            'redirect' => function ($crud, $request, $itemId) {
-                if ($request->current_tab != 'csa-framework') {
-                    $next_tabs = ['action'=>'details-of-the-action',
+        // Do not add custom save action for inline create operation.
+        if($this->crud->getCurrentOperation() !== "InlineCreate") {
+
+            $this->crud->addSaveAction([
+                'name' => 'save_action_and_next',
+                'redirect' => function ($crud, $request, $itemId) {
+                    if ($request->current_tab != 'csa-framework') {
+                        $next_tabs = ['action'=>'details-of-the-action',
                         'details-of-the-action'=>'products-generated',
                         'products-generated'=>'log-framework',
                         'log-framework'=>'csa-framework'];
-                    return $crud->route."/".$itemId."/edit#".$next_tabs[$request->current_tab];
-                } else {
-                    return $crud->route;
-                }
-            }, // what's the redirect URL, where the user will be taken after saving?
+                        return $crud->route."/".$itemId."/edit#".$next_tabs[$request->current_tab];
+                    } else {
+                        return $crud->route;
+                    }
+                }, // what's the redirect URL, where the user will be taken after saving?
 
-            // OPTIONAL:
-            'button_text' => 'Save and Next', // override text appearing on the button
-            // You can also provide translatable texts, for example:
-            // 'button_text' => trans('backpack::crud.save_action_one'),
-            'visible' => function ($crud) {
-                return true;
-            }, // customize when this save action is visible for the current operation
-            'referrer_url' => function ($crud, $request, $itemId) {
-                return $crud->route;
-            }, // override http_referrer_url
-            // 'order' => 1, // change the order save actions are in
-        ]);
-    }
+                // OPTIONAL:
+                'button_text' => 'Save and Next', // override text appearing on the button
+                // You can also provide translatable texts, for example:
+                    // 'button_text' => trans('backpack::crud.save_action_one'),
+                    'visible' => function ($crud) {
+                        return true;
+                    }, // customize when this save action is visible for the current operation
+                    'referrer_url' => function ($crud, $request, $itemId) {
+                        return $crud->route;
+                    }, // override http_referrer_url
+                    // 'order' => 1, // change the order save actions are in
+                ]);
+            }
+        }
 
     /**
      * Define what happens when the Update operation is loaded.
@@ -552,11 +562,7 @@ class ActionCrudController extends CrudController
                 'name'  => 'separator',
                 'type'  => 'custom_html',
                 'value' => '<h6><b>The "Action" that produced the effect </b></h6>
-                <p>In the next section you will describe the action in more detail: the objective, the affected agents, and details about its scope
-
-                This will allow us to build a landscape of the actions and those affected. This picture will be overlaid on the project Logframe and the frameworks that describe Climate Smart Agriculture.
-                Please be detailed in the description of objectives, effects and agents affected. The information you provide will be useful only if there is evidence that backs it up. </p>
-                '
+                <p>Please enter the initial details of the new action here. After you have saved the current Effect, please go to the Actions page and add the additional information to this Action.</p>'
             ],
             [  // Select
                 'label'     => "Team",
@@ -572,6 +578,11 @@ class ActionCrudController extends CrudController
                     return $query->whereIn('id', $teams)->get();
                 }),
 
+            ],
+            [
+                'name' => 'short_name',
+                'label' => 'Enter a short name to identify this specific activity',
+                'type' => 'text',
             ],
             [
                 'name'          => 'description',

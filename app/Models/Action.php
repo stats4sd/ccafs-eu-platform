@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
 class Action extends Model
 {
@@ -28,6 +29,7 @@ class Action extends Model
     'activities_numbers',
     'outputs_numbers',
     'milestones_numbers',
+    'short_label',
     ];
 
     /*
@@ -35,6 +37,16 @@ class Action extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    public function getShortLabelAttribute ()
+    {
+       if($this->short_name != "") {
+           return $this->id . ": " . $this->short_name;
+       }
+
+       return $this->id . ": " . Str::limit($this->description);
+    }
+
 
     public function getOutputIdAttribute()
     {
