@@ -1,4 +1,5 @@
 # CCAFS EU Platform
+Tool for capturing unstructured data about actions and events and tools to link the actions with the events.
 
 https://ccafs-eu-ifad.stats4sd.org
 
@@ -6,7 +7,7 @@ https://ccafs-eu-ifad.stats4sd.org
 This platform is built using Laravel/PHP. The admin panel uses Backpack for Laravel.
 
 ## Setup Local Environment
-1.	Clone repo: `git@github.com:stats4sd/ccafs-eu-platform.git`
+1.	Clone repo: `git clone git@github.com:stats4sd/ccafs-eu-platform.git`
 2.	Copy `.env.example` as a new file and call it `.env`
 3.	Update variables in `.env` file to match your local environment:
     1.	Check APP_URL is correct
